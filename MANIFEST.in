@@ -1,0 +1,13 @@
+# Incluir apenas arquivos importantes para a biblioteca
+include README.md
+include LICENSE
+include pyproject.toml
+include setup.py
+
+recursive-include easy_api *.py
+
+# Excluir arquivos desnecessários
+exclude .gitignore
+exclude *.pyc
+exclude *.pyo
+exclude .env
