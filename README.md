@@ -95,7 +95,7 @@ python manage.py test my_app
 
 ## Documentation
 
-For detailed documentation and usage examples, please visit the [GitHub repository](https://github.com/jacksonsr451/jackson_easy_api).
+For detailed documentation and usage examples, please visit the [GitHub repository](https://github.com/jacksonsr451/jackson-easy-api).
 
 ## License
 
