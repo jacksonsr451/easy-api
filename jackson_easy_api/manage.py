@@ -455,34 +455,60 @@ def run_tests(app_name=None):
         print(f"Tests failed: {e.stderr}")
         sys.exit(1)
 
+def format_app(app_name: str):
+    """
+    Format the given app using isort and blue, using Poetry or pip as appropriate.
+    """
+    if not os.path.isdir(app_name):
+        print(f"Error: The app directory '{app_name}' does not exist.")
+        return
+
+    try:
+        print(f"Formatting the app: {app_name}")
+
+        if os.path.exists("poetry.lock"):
+            print("Poetry detected. Using Poetry to run formatters...")
+            subprocess.check_call(["poetry", "run", "isort", app_name])
+            subprocess.check_call(["poetry", "run", "blue", app_name])
+        elif os.path.exists("requirements.txt"):
+            print("Poetry not detected. Using pip to run formatters...")
+            subprocess.check_call([sys.executable, "-m", "isort", app_name])
+            subprocess.check_call([sys.executable, "-m", "blue", app_name])
+        else:
+            print("No dependency manager detected (poetry.lock or requirements.txt not found).")
+            return
+
+        print("Formatting completed successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error during formatting: {e}")
+
+
 def main():
-    # Set up argparse to handle the commands
     parser = argparse.ArgumentParser(description="Manage your FastAPI project")
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
-    # Migrate command
+    format_app_parser = subparsers.add_parser("format", help="Format the specified app")
+    format_app_parser.add_argument("app_name", type=str, help="Name of the app to format")
+
     subparsers.add_parser("migrate", help="Run migrations")
 
-    # Create project command
     create_project_parser = subparsers.add_parser("createproject", help="Create a new project")
     create_project_parser.add_argument("project_name", type=str, help="Name of the new project")
 
-    # Make migrations command
     make_migrations_parser = subparsers.add_parser("makemigrations", help="Generate new migration with a message")
     make_migrations_parser.add_argument("message", type=str, help="The message for the new migration")
 
-    # Create app command
     create_app_parser = subparsers.add_parser("createapp", help="Create a new app")
     create_app_parser.add_argument("app_name", type=str, help="Name of the new app")
 
-    # Test command (new one)
     test_parser = subparsers.add_parser("test", help="Run tests for the specified app or all apps")
     test_parser.add_argument("app_name", nargs="?", type=str, help="Name of the app to run tests for (optional)")
 
-    # Parse arguments
     args = parser.parse_args()
 
-    if args.command == "migrate":
+    if args.command == "format":
+        format_app(args.app_name)
+    elif args.command == "migrate":
         print("Running migrations...")
         run_migrations()
     elif args.command == "makemigrations":
@@ -498,9 +524,9 @@ def main():
         print(f"Running tests for {args.app_name if args.app_name else 'all apps'}...")
         run_tests(args.app_name)
     elif args.command in ["--help", "-h"]:
-        show_help()
+        parser.print_help()
     else:
-        show_help()
+        parser.print_help()
         print(f"Unknown command: {args.command}")
         sys.exit(1)
 
