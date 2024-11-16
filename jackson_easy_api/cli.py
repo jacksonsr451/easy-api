@@ -13,7 +13,8 @@ def install_dependencies():
             "alembic",
             "psycopg2-binary",
             "python-decouple",
-            "pytest"
+            "pytest",
+            "fastapi",
         ]
         if os.path.exists('poetry.lock'):
             print("Poetry detected. Installing dependencies using Poetry...")
