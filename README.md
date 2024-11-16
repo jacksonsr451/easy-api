@@ -33,13 +33,13 @@ Commands:
 1. Create a new project:
 
 ```bash
-start createproject my_project
+python manage.py createproject my_project
 ```
 
 2. Create a new app within the project:
 
 ```bash
-start createapp my_app
+python manage.py createapp my_app
 ```
 
 > **Important**: After creating a new app, you must add the app name to the \`apps\` list in \`settings.py\`. This ensures the app's routes are included in the FastAPI application. 
@@ -78,19 +78,19 @@ This configuration will ensure that the routes for your app (\`my_app\` in this 
 3. Make migrations for your app:
 
 ```bash
-start makemigrations
+python manage.py makemigrations
 ```
 
 4. Apply migrations to the database:
 
 ```bash
-start migrate
+python manage.py migrate
 ```
 
 5. Run tests for a specific app:
 
 ```bash
-start test my_app
+python manage.py test my_app
 ```
 
 ## Documentation
