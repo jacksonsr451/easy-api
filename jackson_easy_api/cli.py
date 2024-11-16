@@ -42,6 +42,7 @@ def install_dependencies():
             "python-decouple",
             "pytest",
             "fastapi",
+            "uvicorn",
         ]
         if os.path.exists('poetry.lock'):
             print("Poetry detected. Installing dependencies using Poetry...")
