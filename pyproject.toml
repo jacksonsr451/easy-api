@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "jackson_easy_api"
+name = "easy-api"
 version = "0.1.0"
 description = "A FastAPI project generator"
 authors = ["jacksonsr451 <jacksonsr451@gmail.com>"]
@@ -14,11 +14,8 @@ psycopg2-binary = "^2.9.10"
 python-decouple = "^3.8"
 pytest = "^8.3.3"
 
-# Repositórios de fontes (caso necessário)
-[[tool.poetry.source]]
-name = "jackson_easy_api"
-url = "https://github.com/jacksonsr451/jackson_easy_api"
-priority = "primary"
+[tool.poetry.dev-dependencies]
+setuptools = "^75.5.0"
 
 [build-system]
 requires = ["poetry-core"]
