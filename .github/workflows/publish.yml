@@ -28,7 +28,7 @@ jobs:
         run: poetry install
 
       - name: Configure PyPI repository
-        run: poetry config repositories.pypi https://pypi.org/simple/ 
+        run: poetry config repositories.pypi https://upload.pypi.org/legacy/  # Endpoint correto para upload
 
       - name: Configure Poetry with PyPI token
         run: |
@@ -36,6 +36,7 @@ jobs:
 
       - name: Verify Poetry configuration
         run: |
+          echo "Verificando configuração do Poetry..."
           poetry config --list  # Verifica a configuração do Poetry para ver se o token foi setado corretamente
           poetry show  # Mostra os pacotes do projeto para verificar se tudo está configurado corretamente
 
@@ -43,4 +44,3 @@ jobs:
         run: |
           echo "Publishing to PyPI..."
           poetry publish --build --repository pypi  # Publica para o PyPI
-        continue-on-error: true  # Continua mesmo após erro para permitir depuração
