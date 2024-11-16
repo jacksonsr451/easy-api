@@ -302,10 +302,12 @@ def create_project_structure(project_name: str):
     print(f"Project '{project_name}' created successfully at {project_path}")
 
 def create_main_file(project_path: str):
-    main_content = """from {project_path}.core.settings import settings
+    project_name = os.path.basename(project_path)
+
+    main_content = """from {project_name}.core.settings import settings
 
 app = settings.create_app()
-""".format(project_path=project_path)
+""".format(project_name=project_name)
     with open(os.path.join(project_path, "__init__.py"), "w") as file:
         file.write("")
 
