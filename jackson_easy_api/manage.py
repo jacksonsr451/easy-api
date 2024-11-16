@@ -358,7 +358,8 @@ class Settings:
         for app_name in settings.apps:
             app_module = importlib.import_module(f"{app_name}.routes")
             if hasattr(app_module, "middlewares"):
-                application.middleware.extend(app_module.middlewares)
+                for middleware in app_module.middlewares:
+                    application.add_middleware(middleware.cls, **middleware.options)
             application.include_router(app_module.router, prefix=f"/{app_name}", tags=[app_name])
 
         return application
