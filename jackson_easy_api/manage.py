@@ -337,21 +337,28 @@ def create_settings_file(project_path: str):
     settings_content = """import importlib
 from typing import List
 from fastapi import FastAPI
+from fastapi.middleware import Middleware
 
 class Settings:
     app_title: str = "API School"
     app_version: str = "1.0.0"
     apps: List[str] = []
+    middleware = [
+        # Middleware(AuthMiddleware, auth_config=settings.auth_config),
+    ]
 
     @staticmethod
     def create_app() -> FastAPI:
         application: FastAPI = FastAPI(
             title=settings.app_title,
             version=settings.app_version,
+            middleware=middleware,
         )
 
         for app_name in settings.apps:
             app_module = importlib.import_module(f"{app_name}.routes")
+            if hasattr(app_module, "middlewares"):
+                application.middleware.extend(app_module.middlewares)
             application.include_router(app_module.router, prefix=f"/{app_name}", tags=[app_name])
 
         return application
@@ -379,7 +386,13 @@ def create_app_structure(app_name: str):
     package_name = find_package_name()
 
     files = {
-        '__init__.py': """""",
+        '__init__.py': """# {app_name}.__init__.py
+from fastapi.middleware import Middleware
+
+middlewares = [
+    # Middleware(SomeOtherMiddleware),
+]
+""",
         'tests.py': """# {app_name}.tests.py
 import pytest
 from fastapi.testclient import TestClient
