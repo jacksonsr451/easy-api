@@ -8,8 +8,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: production  # Certifique-se de que o ambiente está correto
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -26,10 +24,9 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Debug PYPI_TOKEN
-        run: echo $PYPI_TOKEN  # Exibe o valor do token para depuração
+      - name: Configure Poetry with PyPI token
+        run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}  # Passando o secret do GitHub
 
-      - name: Publish to PyPI # Referência ao secret
-        run: |
-          run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
-          poetry publish --build --repository pypi
+      - name: Publish to PyPI
+        run: poetry publish --build --repository pypi  # Publica para o PyPI
+
