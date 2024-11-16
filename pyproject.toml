@@ -17,9 +17,11 @@ pytest = "^8.3.3"
 [tool.poetry.dev-dependencies]
 setuptools = "^75.5.0"
 
-# Configuração do repositório PyPI
-[tool.poetry.repositories]
-pypi = { url = "https://pypi.org/simple" }
+# Repositórios de fontes (caso necessário)
+[[tool.poetry.source]]
+name = "jackson_easy_api"
+url = "https://github.com/jacksonsr451/jackson_easy_api"
+priority = "primary"
 
 [build-system]
 requires = ["poetry-core"]
