@@ -1,0 +1,38 @@
+name: Publish to PyPI
+
+on:
+  push:
+    branches:
+      - main  # Ou qualquer branch principal que você queira usar para publicação
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Defina a versão do Python que seu pacote usa
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry  # Ou setuptools, caso você use setuptools
+          poetry install  # Caso use Poetry, ou pip install -r requirements.txt para dependências
+
+      - name: Build package
+        run: |
+          poetry build  # Caso esteja usando Poetry para criar os pacotes
+          # pip install setuptools wheel
+          # python setup.py sdist bdist_wheel  # Se usar setuptools
+
+      - name: Publish to PyPI
+        env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          poetry publish --build --repository pypi  # Para usar Poetry
+          # python -m twine upload dist/*  # Se usar Twine diretamente com setuptools
