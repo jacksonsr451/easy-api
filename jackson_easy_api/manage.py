@@ -306,6 +306,8 @@ def create_main_file(project_path: str):
 
 app = settings.create_app()
 """
+    with open(os.path.join(project_path, "__init__.py"), "w") as file:
+        file.write("")
 
     with open(os.path.join(project_path, "main.py"), "w") as file:
         file.write(main_content)
@@ -355,7 +357,7 @@ class Settings:
 settings = Settings()
 """
     with open(os.path.join(project_path, "core", "__init__.py"), "w") as file:
-        file.write(settings_content)
+        file.write("")
 
     with open(os.path.join(project_path, "core", "settings.py"), "w") as file:
         file.write(settings_content)
