@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "easy-api"
+name = "jackson_easy_api"
 version = "0.1.0"
-description = ""
+description = "A FastAPI project generator"
 authors = ["jacksonsr451 <jacksonsr451@gmail.com>"]
 license = "MIT"
 readme = "README.md"
@@ -13,8 +13,13 @@ alembic = "^1.14.0"
 psycopg2-binary = "^2.9.10"
 python-decouple = "^3.8"
 pytest = "^8.3.3"
+
+[tool.poetry.dev-dependencies]
 setuptools = "^75.5.0"
 
+# Configuração do repositório PyPI
+[tool.poetry.repositories]
+pypi = { url = "https://pypi.org/simple" }
 
 [build-system]
 requires = ["poetry-core"]
