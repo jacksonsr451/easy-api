@@ -1,4 +1,10 @@
 from setuptools import setup, find_packages
+import os
+import shutil
+
+def copy_manage_file():
+    if os.path.exists('jackson_easy_api/manage.py'):
+        shutil.copy('jackson_easy_api/manage.py', 'manage.py')
 
 setup(
     name="easy-api",
@@ -29,3 +35,5 @@ setup(
     },
     data_files=[('', ['jackson_easy_api/manage.py'])],
 )
+
+copy_manage_file()
