@@ -79,7 +79,7 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context
 from decouple import config as env_config
 
-from api_school.core.settings import settings
+from {app_name}.core.settings import settings
 
 sys.path.append(dirname(dirname(abspath(__file__))))
 
