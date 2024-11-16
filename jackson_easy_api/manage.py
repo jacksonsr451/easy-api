@@ -348,11 +348,11 @@ class Settings:
     ]
 
     @staticmethod
-    def create_app() -> FastAPI:
+    def create_app(cls) -> FastAPI:
         application: FastAPI = FastAPI(
             title=settings.app_title,
             version=settings.app_version,
-            middleware=middleware,
+            middleware=cls.middleware,
         )
 
         for app_name in settings.apps:
