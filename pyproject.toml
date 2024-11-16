@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jackson_easy_api"
-version = "0.3.25"
+version = "0.3.251"
 description = "A FastAPI project generator"
 authors = ["jacksonsr451 <jacksonsr451@gmail.com>"]
 license = "MIT"

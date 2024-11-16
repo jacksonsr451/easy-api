@@ -10,7 +10,7 @@ def install_dependencies():
     try:
         if os.path.exists('poetry.lock'):
             print("Poetry detected. Installing dependencies using Poetry...")
-            subprocess.check_call([sys.executable, '-m', 'poetry', 'install'])
+            subprocess.check_call(['poetry', 'install'])
             print("Dependencies installed successfully using Poetry.")
         elif os.path.exists('requirements.txt'):
             print("Poetry not detected. Installing dependencies using pip...")
