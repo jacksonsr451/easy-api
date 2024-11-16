@@ -1,11 +1,9 @@
 # Incluir apenas arquivos importantes para a biblioteca
 include README.md
 include LICENSE
-include pyproject.toml
-include setup.py
 include jackson_easy_api/manage.py
 
-recursive-include jackson_easy_api *.py
+recursive-include jackson_easy_api manage.py
 
 # Excluir arquivos desnecessários
 exclude .gitignore
