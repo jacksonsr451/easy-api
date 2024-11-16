@@ -21,12 +21,19 @@ jobs:
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
 
+      - name: Check Poetry version
+        run: poetry --version  # Verifica a versão do Poetry
+
       - name: Install dependencies
         run: poetry install
 
       - name: Configure Poetry with PyPI token
         run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}  # Passando o secret do GitHub
 
-      - name: Publish to PyPI
-        run: poetry publish --build --repository pypi  # Publica para o PyPI
+      - name: Verify Poetry configuration
+        run: poetry config  # Verifica a configuração do Poetry para ver se o token foi setado
 
+      - name: Publish to PyPI
+        run: |
+          echo "Publishing to PyPI..."
+          poetry publish --build --repository pypi  # Publica para o PyPI
