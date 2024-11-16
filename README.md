@@ -52,9 +52,9 @@ from typing import List
 from fastapi import FastAPI
 
 class Settings:
-    app_title: str = \"API School\"
-    app_version: str = \"1.0.0\"
-    apps: List[str] = [\"my_app\"]  # Add your app here
+    app_title: str = "API School"
+    app_version: str = "1.0.0"
+    apps: List[str] = ["my_app"]  # Add your app here
 
     @staticmethod
     def create_app() -> FastAPI:
@@ -65,8 +65,8 @@ class Settings:
 
         # Loop through the apps and include their routes
         for app_name in settings.apps:
-            app_module = importlib.import_module(f\"{app_name}.routes\")
-            application.include_router(app_module.router, prefix=f\"/{app_name}\", tags=[app_name])
+            app_module = importlib.import_module(f"{app_name}.routes")
+            application.include_router(app_module.router, prefix=f"{app_name}", tags=[app_name])
 
         return application
 
