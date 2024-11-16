@@ -291,13 +291,13 @@ def create_project_structure(project_name: str):
     create_main_file(project_path)
     create_database_file(project_path)
     create_settings_file(project_path)
-    create_alembic_ini(project_path)
-    create_env(project_path)
-    create_gitignore(project_path)
+    create_alembic_ini(base_path)
+    create_env(base_path)
+    create_gitignore(base_path)
 
-    create_alembic_env_file(project_path)
-    create_alembic_script_file(project_path)
-    create_versions_folder(project_path)
+    create_alembic_env_file(os.path.join(base_path, "alembic"))
+    create_alembic_script_file(os.path.join(base_path, "alembic"))
+    create_versions_folder(os.path.join(base_path, "alembic"))
 
     print(f"Project '{project_name}' created successfully at {project_path}")
 
