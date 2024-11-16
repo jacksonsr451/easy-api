@@ -347,7 +347,7 @@ class Settings:
         # Middleware(AuthMiddleware, auth_config=settings.auth_config),
     ]
 
-    @staticmethod
+    @classmethod
     def create_app(cls) -> FastAPI:
         application: FastAPI = FastAPI(
             title=settings.app_title,
