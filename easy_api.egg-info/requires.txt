@@ -1,5 +1,0 @@
-fastapi
-sqlalchemy
-alembic
-python-decouple
-pytest
