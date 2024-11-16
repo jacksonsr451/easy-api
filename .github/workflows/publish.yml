@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
+      - name: Configure PyPI repository
+        run: poetry config repositories.pypi https://pypi.org/simple 
+
       - name: Configure Poetry with PyPI token
         run: |
           poetry config pypi-token.pypi "${{ secrets.PYPI_TOKEN }}"  # Passando o secret do GitHub com a sintaxe correta
