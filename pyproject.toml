@@ -14,9 +14,6 @@ psycopg2-binary = "^2.9.10"
 python-decouple = "^3.8"
 pytest = "^8.3.3"
 
-[tool.poetry.dev-dependencies]
-setuptools = "^75.5.0"
-
 # Repositórios de fontes (caso necessário)
 [[tool.poetry.source]]
 name = "jackson_easy_api"
