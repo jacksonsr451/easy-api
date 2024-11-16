@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jackson_easy_api"
-version = "0.3.300"
+version = "0.3.301"
 description = "A FastAPI project generator"
 authors = ["jacksonsr451 <jacksonsr451@gmail.com>"]
 license = "MIT"
@@ -13,6 +13,8 @@ alembic = "^1.14.0"
 psycopg2-binary = "^2.9.10"
 python-decouple = "^3.8"
 pytest = "^8.3.3"
+isort = "^5.13.2"
+blue = "^0.9.1"
 
 [tool.poetry.dev-dependencies]
 setuptools = "^75.5.0"
@@ -23,3 +25,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 start = "jackson_easy_api.cli:start_project"
+format = "jackson_easy_api.cli:format_app"

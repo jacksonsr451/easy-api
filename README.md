@@ -10,7 +10,7 @@ To install Easy API, run the following command:
 pip install jackson_easy_api
 ```
 
-After installation, run the \`start\` command to initialize your project and generate the \`manage.py\` file in the root of your project:
+After installation, run the `start` command to initialize your project and generate the `manage.py` file in the root of your project:
 
 ```bash
 start
@@ -25,6 +25,7 @@ Commands:
   makemigrations         Generate a new migration with a message
   migrate                Apply migrations to the database
   test <app_name>        Run tests for the specified app (or all apps if no app_name is provided)
+  format <app_name>      Format a specified app using isort and blue
   --help, -h             Show this help message
 ```
 
@@ -42,9 +43,9 @@ python manage.py createproject my_project
 python manage.py createapp my_app
 ```
 
-> **Important**: After creating a new app, you must add the app name to the \`apps\` list in \`settings.py\`. This ensures the app's routes are included in the FastAPI application. 
+> **Important**: After creating a new app, you must add the app name to the `apps` list in `settings.py`. This ensures the app's routes are included in the FastAPI application. 
 
-Here's an example of how to modify \`settings.py\`:
+Here's an example of how to modify `settings.py`:
 
 ```python
 import importlib
@@ -73,7 +74,7 @@ class Settings:
 settings = Settings()
 ```
 
-This configuration will ensure that the routes for your app (\`my_app\` in this case) are included in the FastAPI application with a URL prefix of \`/my_app\`.
+This configuration will ensure that the routes for your app (`my_app` in this case) are included in the FastAPI application with a URL prefix of `/my_app`.
 
 3. Make migrations for your app:
 

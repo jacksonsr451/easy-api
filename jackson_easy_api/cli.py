@@ -6,6 +6,33 @@ from pathlib import Path
 import subprocess
 import sys
 
+def format_app(app_name: str):
+    """
+    Format the given app using isort and blue, using Poetry or pip as appropriate.
+    """
+    if not os.path.isdir(app_name):
+        print(f"Error: The app directory '{app_name}' does not exist.")
+        return
+
+    try:
+        print(f"Formatting the app: {app_name}")
+
+        if os.path.exists("poetry.lock"):
+            print("Poetry detected. Using Poetry to run formatters...")
+            subprocess.check_call(["poetry", "run", "isort", app_name])
+            subprocess.check_call(["poetry", "run", "blue", app_name])
+        elif os.path.exists("requirements.txt"):
+            print("Poetry not detected. Using pip to run formatters...")
+            subprocess.check_call([sys.executable, "-m", "isort", app_name])
+            subprocess.check_call([sys.executable, "-m", "blue", app_name])
+        else:
+            print("No dependency manager detected (poetry.lock or requirements.txt not found).")
+            return
+
+        print("Formatting completed successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error during formatting: {e}")
+
 def install_dependencies():
     try:
         packages = [
