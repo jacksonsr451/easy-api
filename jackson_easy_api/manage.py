@@ -71,7 +71,7 @@ datefmt = %H:%M:%S
     print("File 'alembic.ini' created.")
 
 
-def create_alembic_env_file(project_path: str):
+def create_alembic_env_file(project_path: str, app_name: str):
     alembic_env_content = """import sys
 import importlib
 from os.path import abspath, dirname
@@ -83,7 +83,7 @@ from api_school.core.settings import settings
 
 sys.path.append(dirname(dirname(abspath(__file__))))
 
-from api_school.core.database import Base
+from {app_name}.core.database import Base
 
 DATABASE_URL = env_config("DATABASE_URL", default="sqlite:///./test.db")
 
@@ -124,7 +124,7 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
-"""
+""".format(app_name=app_name)
     alembic_dir = os.path.join(project_path, "alembic")
     if not os.path.exists(alembic_dir):
         os.makedirs(alembic_dir)
@@ -295,7 +295,7 @@ def create_project_structure(project_name: str):
     create_env(base_path)
     create_gitignore(base_path)
 
-    create_alembic_env_file(base_path)
+    create_alembic_env_file(base_path, project_name)
     create_alembic_script_file(base_path)
     create_versions_folder(base_path)
 
