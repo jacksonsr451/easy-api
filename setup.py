@@ -1,21 +1,20 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 import os
-import shutil
+import subprocess
 
-def copy_manage_file():
-    if os.path.exists('jackson_easy_api/manage.py'):
-        shutil.copy('jackson_easy_api/manage.py', 'manage.py')
+def post_install():
+    subprocess.call([os.path.join(os.path.dirname(__file__), 'post_install.py')])
 
 setup(
     name="easy-api",
-    version="0.1.0",
+    version="0.1.3",
     description="A FastAPI project generator",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     author="Jackson Severino da Rocha",
     author_email="jacksonsr451@gmail.com",
     url="https://github.com/jacksonsr451/easy-api",
-    packages=find_packages(where=".", exclude=["tests"]),
+    packages=['jackson_easy_api'],
     include_package_data=True,
     install_requires=[
         "fastapi",
@@ -30,10 +29,12 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
-    package_data={
-        '': ['jackson_easy_api/manage.py'],
-    },
     data_files=[('', ['jackson_easy_api/manage.py'])],
+    entry_points={
+        'console_scripts': [
+            'post-install = post_install:move_manage_py',
+        ],
+    },
 )
 
-copy_manage_file()
+post_install()
