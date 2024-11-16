@@ -7,4 +7,4 @@ Easy API é uma biblioteca simples para construção de APIs usando FastAPI e SQ
 Para instalar, execute o seguinte comando:
 
 ```bash
-pip install easy-api
+pip install jackson_easy_api
