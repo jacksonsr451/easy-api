@@ -28,7 +28,7 @@ jobs:
         run: poetry install
 
       - name: Configure PyPI repository
-        run: poetry config repositories.pypi https://pypi.org/simple 
+        run: poetry config repositories.pypi https://pypi.org/simple/ 
 
       - name: Configure Poetry with PyPI token
         run: |
