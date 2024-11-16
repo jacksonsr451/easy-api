@@ -10,7 +10,16 @@ def install_dependencies():
     try:
         if os.path.exists('poetry.lock'):
             print("Poetry detected. Installing dependencies using Poetry...")
-            subprocess.check_call(['poetry', 'install'])
+            packages = [
+                "sqlalchemy",
+                "alembic",
+                "psycopg2-binary",
+                "python-decouple",
+                "pytest"
+            ]
+
+            for package in packages:
+                subprocess.check_call(['poetry', 'add', package])
             print("Dependencies installed successfully using Poetry.")
         elif os.path.exists('requirements.txt'):
             print("Poetry not detected. Installing dependencies using pip...")
