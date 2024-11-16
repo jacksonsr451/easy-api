@@ -28,10 +28,11 @@ jobs:
         run: poetry install
 
       - name: Configure Poetry with PyPI token
-        run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}  # Passando o secret do GitHub
+        run: |
+          poetry config pypi-token.pypi "${{ secrets.PYPI_TOKEN }}"  # Passando o secret do GitHub com a sintaxe correta
 
       - name: Verify Poetry configuration
-        run: poetry config  # Verifica a configuração do Poetry para ver se o token foi setado
+        run: poetry config --list  # Verifica a configuração do Poetry para ver se o token foi setado corretamente
 
       - name: Publish to PyPI
         run: |
